@@ -94,3 +94,44 @@ git fetch + git merge  等同于git pull
 # 合并
 
 
+
+
+git flow
+
+经典模型必须使用dev分支，复杂度高，hotfix与release分支，多次合并
+
+
+适用于持续集成多环境场景，上游分支向下游发展
+bug => new branch => master => pre branch => target branch
+
+适用于版本项目,文档版本成master检出bug修复在分支 （vue和react）
+master => stable => new brach => bugfix => version
+
+
+
+docker build -t web:1.0 .
+
+查看这个容器打印的日志信息 docker logs -f web
+
+docker images
+
+docker ps 
+
+
+--shell脚本
+
+CONTAINER = ${container_name}
+POST = ${post}
+
+镜像构建
+docker build --no-cache -t ${image_name}:${tag} .
+
+
+RUNNING = ${ docker  inspect --format ="{{ .State.Running }}" $CONTAINER 2 >  /dev/null }
+if[ ! -n $RUNNING ]; then
+    echo "$CONTAINER does not exist"
+    return 1
+fi
+
+
+docker run -itd --name $CONTAINER -p $POST:80 ${image_name}:${tag}
